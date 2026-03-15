@@ -1,0 +1,86 @@
+{
+  "project": "Task Manager CLI",
+  "branch": "main",
+  "goals": [
+    {
+      "id": "1",
+      "goal": "Project structure exists with Task dataclass and JSON storage utilities. Tests verify Task creation, serialization, and storage load/save.",
+      "depends_on": [],
+      "verification": {
+        "type": "test",
+        "command": "pytest tests/test_task.py tests/test_storage.py -v"
+      },
+      "status": "passed",
+      "added_by": "human"
+    },
+    {
+      "id": "2",
+      "goal": "Users can add tasks from the CLI with title, optional description, due date, and priority.",
+      "depends_on": ["1"],
+      "verification": {
+        "type": "test",
+        "tests_to_write": ["add command tests in tests/test_cli.py"],
+        "command": "pytest tests/test_cli.py -v -k add"
+      },
+      "status": "pending",
+      "added_by": "human"
+    },
+    {
+      "id": "3",
+      "goal": "Users can list all tasks, filter by status (done/todo), and filter by priority.",
+      "depends_on": ["2"],
+      "verification": {
+        "type": "test",
+        "tests_to_write": ["list command tests in tests/test_cli.py"],
+        "command": "pytest tests/test_cli.py -v -k list"
+      },
+      "status": "pending",
+      "added_by": "human"
+    },
+    {
+      "id": "4",
+      "goal": "Users can mark a task as done by ID.",
+      "depends_on": ["2"],
+      "verification": {
+        "type": "test",
+        "tests_to_write": ["done command tests in tests/test_cli.py"],
+        "command": "pytest tests/test_cli.py -v -k done"
+      },
+      "status": "pending",
+      "added_by": "human"
+    },
+    {
+      "id": "5",
+      "goal": "Users can delete a task by ID.",
+      "depends_on": ["2"],
+      "verification": {
+        "type": "test",
+        "command": "pytest tests/test_cli.py -v -k delete"
+      },
+      "status": "pending",
+      "added_by": "human"
+    },
+    {
+      "id": "6",
+      "goal": "Users can edit a task's title, description, due date, or priority.",
+      "depends_on": ["2"],
+      "verification": {
+        "type": "test",
+        "command": "pytest tests/test_cli.py -v -k edit"
+      },
+      "status": "pending",
+      "added_by": "human"
+    },
+    {
+      "id": "7",
+      "goal": "Users can search tasks by keyword matching title or description.",
+      "depends_on": ["2"],
+      "verification": {
+        "type": "test",
+        "command": "pytest tests/test_cli.py -v -k search"
+      },
+      "status": "pending",
+      "added_by": "human"
+    }
+  ]
+}
