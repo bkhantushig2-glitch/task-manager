@@ -19,10 +19,9 @@
       "depends_on": ["1"],
       "verification": {
         "type": "test",
-        "tests_to_write": ["add command tests in tests/test_cli.py"],
         "command": "pytest tests/test_cli.py -v -k add"
       },
-      "status": "pending",
+      "status": "passed",
       "added_by": "human"
     },
     {
@@ -31,10 +30,9 @@
       "depends_on": ["2"],
       "verification": {
         "type": "test",
-        "tests_to_write": ["list command tests in tests/test_cli.py"],
         "command": "pytest tests/test_cli.py -v -k list"
       },
-      "status": "pending",
+      "status": "passed",
       "added_by": "human"
     },
     {
@@ -43,10 +41,9 @@
       "depends_on": ["2"],
       "verification": {
         "type": "test",
-        "tests_to_write": ["done command tests in tests/test_cli.py"],
         "command": "pytest tests/test_cli.py -v -k done"
       },
-      "status": "pending",
+      "status": "passed",
       "added_by": "human"
     },
     {
@@ -57,7 +54,7 @@
         "type": "test",
         "command": "pytest tests/test_cli.py -v -k delete"
       },
-      "status": "pending",
+      "status": "passed",
       "added_by": "human"
     },
     {
@@ -68,7 +65,7 @@
         "type": "test",
         "command": "pytest tests/test_cli.py -v -k edit"
       },
-      "status": "pending",
+      "status": "passed",
       "added_by": "human"
     },
     {
@@ -79,7 +76,7 @@
         "type": "test",
         "command": "pytest tests/test_cli.py -v -k search"
       },
-      "status": "pending",
+      "status": "passed",
       "added_by": "human"
     }
   ]

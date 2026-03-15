@@ -11,25 +11,28 @@
 - [x] Create basic test structure
 
 ## Phase 2: Core Commands
-- [ ] Implement `task add`
-- [ ] Add tests for `task add`
-- [ ] Implement `task list`
-- [ ] Add tests for `task list`
-- [ ] Implement `task done`
-- [ ] Add tests for `task done`
+- [x] Implement `task add`
+- [x] Add tests for `task add`
+- [x] Implement `task list`
+- [x] Add tests for `task list`
+- [x] Implement `task done`
+- [x] Add tests for `task done`
 
 ## Phase 3: Additional Commands
-- [ ] Implement `task delete`
-- [ ] Implement `task edit`
-- [ ] Implement `task search`
-- [ ] Add tests for remaining commands
+- [x] Implement `task delete`
+- [x] Implement `task edit`
+- [x] Implement `task search`
+- [x] Add tests for remaining commands
 
 ## Phase 4: Polish
-- [ ] Add error handling for all edge cases
-- [ ] Add colored output
-- [ ] Add --help documentation
+- [x] Add error handling for all edge cases
+- [x] Add colored output
+- [x] Add --help documentation
 
 ## Progress Log
 | Date | Task | Status | Notes |
 |------|------|--------|-------|
 | 2026-03-15 | Phase 1: Setup | Complete | Project structure, Task dataclass, storage, tests |
+| 2026-03-15 | Phase 2: Core Commands | Complete | add, list, done commands with tests |
+| 2026-03-15 | Phase 3: Additional Commands | Complete | delete, edit, search with tests |
+| 2026-03-15 | Phase 4: Polish | Complete | Error handling, --help via Click |
