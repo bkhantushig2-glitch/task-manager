@@ -1,3 +1,5 @@
+from datetime import date
+
 import click
 from .task import Task
 from .storage import load_tasks, save_tasks, get_next_id
@@ -17,8 +19,37 @@ def format_task(t):
     priority_color = PRIORITY_COLORS.get(t.priority, "white")
     priority_label = click.style(t.priority, fg=priority_color)
     title = click.style(t.title, strikethrough=True) if t.status == "done" else t.title
-    due_str = f" (due: {t.due_date})" if t.due_date else ""
+    due_str = ""
+    if t.due_date:
+        try:
+            due = date.fromisoformat(t.due_date)
+            if t.status != "done" and due < date.today():
+                due_str = click.style(f" (OVERDUE: {t.due_date})", fg="red", bold=True)
+            else:
+                due_str = f" (due: {t.due_date})"
+        except ValueError:
+            due_str = f" (due: {t.due_date})"
     return f"[{done_marker}] #{t.id} [{priority_label}] {title}{due_str}"
+
+
+def sort_tasks(tasks):
+    """Sort tasks: overdue first, then by due date, then no-date tasks last."""
+    today = date.today()
+
+    def sort_key(t):
+        if t.status == "done":
+            return (2, "9999-99-99")
+        if t.due_date:
+            try:
+                due = date.fromisoformat(t.due_date)
+                if due < today:
+                    return (0, t.due_date)
+                return (1, t.due_date)
+            except ValueError:
+                return (1, "9999-99-99")
+        return (1, "9999-99-99")
+
+    return sorted(tasks, key=sort_key)
 
 
 @cli.command()
@@ -56,7 +87,7 @@ def list_tasks(status, priority):
         click.echo("No tasks found.")
         return
 
-    for t in tasks:
+    for t in sort_tasks(tasks):
         click.echo(format_task(t))
 
 
@@ -107,8 +138,8 @@ def edit(task_id, title, description, due, priority):
                 t.due_date = due
             if priority is not None:
                 t.priority = priority
-            from datetime import datetime
-            t.updated_at = datetime.now().isoformat()
+            from datetime import datetime as dt
+            t.updated_at = dt.now().isoformat()
             save_tasks(tasks)
             click.echo(f"Task #{task_id} updated.")
             return
