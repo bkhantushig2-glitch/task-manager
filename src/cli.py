@@ -9,6 +9,18 @@ def cli():
     pass
 
 
+PRIORITY_COLORS = {"high": "red", "medium": "yellow", "low": "green"}
+
+
+def format_task(t):
+    done_marker = click.style("x", fg="green") if t.status == "done" else " "
+    priority_color = PRIORITY_COLORS.get(t.priority, "white")
+    priority_label = click.style(t.priority, fg=priority_color)
+    title = click.style(t.title, strikethrough=True) if t.status == "done" else t.title
+    due_str = f" (due: {t.due_date})" if t.due_date else ""
+    return f"[{done_marker}] #{t.id} [{priority_label}] {title}{due_str}"
+
+
 @cli.command()
 @click.argument("title")
 @click.option("--description", "-d", default="", help="Task description")
@@ -45,9 +57,7 @@ def list_tasks(status, priority):
         return
 
     for t in tasks:
-        done_marker = "x" if t.status == "done" else " "
-        due_str = f" (due: {t.due_date})" if t.due_date else ""
-        click.echo(f"[{done_marker}] #{t.id} [{t.priority}] {t.title}{due_str}")
+        click.echo(format_task(t))
 
 
 @cli.command()
@@ -118,9 +128,7 @@ def search(keyword):
         return
 
     for t in matches:
-        done_marker = "x" if t.status == "done" else " "
-        due_str = f" (due: {t.due_date})" if t.due_date else ""
-        click.echo(f"[{done_marker}] #{t.id} [{t.priority}] {t.title}{due_str}")
+        click.echo(format_task(t))
 
 
 if __name__ == "__main__":
